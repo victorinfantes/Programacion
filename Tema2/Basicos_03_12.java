@@ -10,11 +10,7 @@ public class Basicos_03_12 {
 		System.out.println("Por favor ingresa tu frase : ");
 		frase = sc.nextLine();
 		
-		
-		for(int i=0;i<frase.length();i++)
-			{
-				if (frase.charAt(i))
-			}
+
 		
 		
 		

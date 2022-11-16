@@ -1,7 +1,7 @@
 package octubre;
 import java.util.Scanner;
 
-public class pedirnumeros {
+public class Ejerciciobasico01 {
 
 	public static void main(String[] args) {
 		// Pedir dos numeros y decir si son iguales o no
