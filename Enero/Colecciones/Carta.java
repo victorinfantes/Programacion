@@ -3,23 +3,27 @@ package Enero.Colecciones;
 import java.util.Objects;
 
 public class Carta implements Comparable<Carta> {
-    private static String[] numeros = {"01as", "02dos", "03tres", "04cuatro", "05cinco", "06seis", "07siete", "08ocho", "09nueve", "010sota", "011caballo", "012rey"};
+    private static String[] numeros = {"as", "dos", "tres", "cuatro", "cinco", "seis", "siete",  "sota", "caballo", "rey"};
     private static String[] palos = {"bastos", "copas", "espadas", "oros"};
-    private String numero;
+    private Integer numero;
     private String palo;
 
     public Carta() {
-        this.numero = numeros[(int) (Math.random() * 10)];
+        this.numero =(int) (Math.random() * 10);
         this.palo = palos[(int) (Math.random() * 4)];
 
     }
 
-    public String getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
     public String getPalo() {
         return palo;
+    }
+
+    public String getFigura() {
+        return numeros[numero];
     }
 
     @Override
