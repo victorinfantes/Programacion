@@ -1,6 +1,7 @@
 package Enero.Colecciones.GestionTienda;
 
 import java.sql.SQLOutput;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -134,10 +135,77 @@ public class GestionTiendaApp {
                         System.out.println("Puede usar la opcion de listados para consultar codigos");
                     }else {
                         i=a.indexOf(new Articulo(codigoIntro));
-
+                        System.out.println("Su articulo es : "+a.get(i));
+                        System.out.println("Entrando mercanica nueva de ese articulo");
+                        System.out.println("Introduce la cantidad de unidades nuevas de ese articulo");
+                        stockIntro=Integer.parseInt(sc.nextLine());
+                        a.get(i).setStock(stockIntro+a.get(i).getStock());
+                        System.out.println("Articulo actualizado en el almacen :");
+                        System.out.println(a.get(i));//Imprimimos el articulo actualizado
                     }
                     break;
-                case 6:
+                case 6://Gestion de ventas necesitamos un submenu para ventas
+                    System.out.println("Gestión de ventas");
+                    do {
+                        System.out.println("\n Añadir articulos a la venta");
+                        System.out.println("\n Generar las factura final de la venta ");
+                        System.out.println("\n Cancelar la venta ");
+                        System.out.println("Introduzca la opcion deseada ");
+                        opcion2=Integer.parseInt(sc.nextLine());
+                        switch (opcion2) {
+                            case 1://Añadimos una linea de factura
+                                System.out.println("Por favor introduzca el codigo del articulo ");
+                                codigoIntro=sc.nextLine();
+                                if (!a.contains(new Articulo(codigoIntro))) {
+                                    System.out.println("Ese articulo no existe introduzca uno valido");
+                                }else {
+                                    i=a.indexOf(new Articulo(codigoIntro));
+                                    System.out.println(a.get(i));//Imprime el articulo a vender
+                                    if (lineasFra.containsKey(codigoIntro)) {
+                                        unidadesEnFactura=lineasFra.get(codigoIntro);
+                                    }else {//este articulo existe
+                                        unidadesEnFactura=0;
+                                    }
+                                    System.out.println("Unidades de este articulo que lleva en la factira :"+unidadesEnFactura);
+                                    System.out.println("Unidades que quiere incorporar a la factura ");
+                                    unidades=Integer.parseInt(sc.nextLine());
+                                    if ((a.get(i).getStock())-unidadesEnFactura<unidades){
+                                        System.out.println("No hay suficiente stock");
+                                        System.out.println("En este caso la venta maxima es :"+(a.get(i).getStock()-unidades));
+                                    }else if(lineasFra.containsKey(codigoIntro)) {
+                                        lineasFra.put(codigoIntro, lineasFra.get(codigoIntro)+unidades);
+                                    }
+                                    else {
+                                        lineasFra.put(codigoIntro,unidades);
+                                    }
+                                }
+                                System.out.println("\n\n CODIGO | UNIDADES | PRECIO UNIDAD | SUBTOTAL");
+                                System.out.println("---------------------------------------------------");
+                                for (Map.Entry pareja: lineasFra.entrySet()) {
+                                    codigo=pareja.getKey().toString();//consigo el codigo del articulo en el hashmap
+                                    i= a.indexOf(new Articulo(codigo));//consigo posicion del articulo en el array
+                                    unidades=Integer.parseInt(pareja.getValue().toString());
+                                    subtotal=unidades*a.get(i).getPrecioDeVenta();
+                                    System.out.println(codigo+a.get(i).getDescripcion()+unidades+a.get(i).getPrecioDeVenta()+subtotal);
+                                }
+
+                                break;
+                            case 2://Generar factura final con todas las lineas de factura
+                                System.out.println("\n\n CODIGO | UNIDADES | PRECIO UNIDAD | SUBTOTAL");
+                                System.out.println("---------------------------------------------------");
+                                baseImponible=0;
+                                for (Map.Entry pareja: lineasFra.entrySet()) {
+                                    codigo = pareja.getKey().toString();
+                                    i=a.indexOf(new Articulo(codigo));
+                                    unidades=Integer.parseInt(pareja.getValue().toString());
+                                    subtotal=unidades*a.get(i).getPrecioDeVenta();
+                                    System.out.println(codigo+a.get(i).getDescripcion()+unidades+a.get(i).getPrecioDeVenta()+subtotal);
+                                    baseImponible=baseImponible+subtotal;
+
+                                }
+                                break;
+                        }
+                    }while(opcion2!=3);
                     break;
             }
         } while (opcion != 7);
