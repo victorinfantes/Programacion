@@ -147,9 +147,9 @@ public class GestionTiendaApp {
                 case 6://Gestion de ventas necesitamos un submenu para ventas
                     System.out.println("Gestión de ventas");
                     do {
-                        System.out.println("\n Añadir articulos a la venta");
-                        System.out.println("\n Generar las factura final de la venta ");
-                        System.out.println("\n Cancelar la venta ");
+                        System.out.println("\n 1. Añadir articulos a la venta");
+                        System.out.println("\n 2. Generar las factura final de la venta ");
+                        System.out.println("\n 3. Cancelar la venta ");
                         System.out.println("Introduzca la opcion deseada ");
                         opcion2=Integer.parseInt(sc.nextLine());
                         switch (opcion2) {
@@ -199,13 +199,19 @@ public class GestionTiendaApp {
                                     i=a.indexOf(new Articulo(codigo));
                                     unidades=Integer.parseInt(pareja.getValue().toString());
                                     subtotal=unidades*a.get(i).getPrecioDeVenta();
-                                    System.out.println(codigo+a.get(i).getDescripcion()+unidades+a.get(i).getPrecioDeVenta()+subtotal);
+                                    System.out.println(codigo+" \n "+a.get(i).getDescripcion()+" \n "+unidades+" \n "+a.get(i).getPrecioDeVenta()+" \n "+subtotal);
                                     baseImponible=baseImponible+subtotal;
-
+                                    a.get(i).setStock(a.get(i).getStock()-unidades);
                                 }
+                                System.out.println("------------------------FACTURA FINAL-----------------------");
+                                System.out.println("------------------------BASE IMPONIBLE: "+baseImponible);
+                                System.out.println("------------------------IVA(21%): "+baseImponible*0.21);
+                                System.out.println("------------------------TOTAL: "+(baseImponible+(baseImponible*0.21)));
+                                System.out.println("\n\n FACTURA GENERADA \n Pulse Intro para volver al menú");
+                                sc.nextLine();
                                 break;
                         }
-                    }while(opcion2!=3);
+                    }while(opcion2==1);
                     break;
             }
         } while (opcion != 7);
