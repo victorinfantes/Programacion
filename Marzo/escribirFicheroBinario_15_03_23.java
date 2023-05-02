@@ -1,12 +1,10 @@
 package Marzo;
 
-import java.io.DataOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
-public class Ejercicio1 {
+public class escribirFicheroBinario_15_03_23 {
+
     public static void main(String[] args) {
         //1.Escribir numeros en un fichero binario
         //Lee numeros enteros por teclado y los escribe en el fichero datos.dat
@@ -23,7 +21,8 @@ public class Ejercicio1 {
             System.out.println("Introduce numero para escribir al fichero -1 para acabar");
             numero = sc.nextInt();
             while (numero != -1) {
-                salida.write(numero);
+                salida.writeInt(numero); //IMPORTANTE : salida.write(numero) NO FUNCIONA TIENES QUE AÑADIR
+                //EL TIPO DE DATO QUE QUIERES LEER
                 System.out.println("Introduce numero para escribir al fichero -1 para acabar");
                 numero = sc.nextInt();
             }
@@ -52,4 +51,7 @@ public class Ejercicio1 {
         //salida.close();
 
     }
+
 }
+
+
