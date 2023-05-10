@@ -30,6 +30,7 @@ public class BorrarFilas {
         String SentenciaDeBorrado="DELETE FROM PRODUCTOS WHERE CODIGOARTICULO = 'AR02'";
 
         miStatement.executeUpdate(SentenciaDeBorrado);
+        System.out.println("PRODUCTO BORRADO ADECUADAMENTE DE LA TABLA");
 
 
 
